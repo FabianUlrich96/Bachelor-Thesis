@@ -1,23 +1,27 @@
-import math
-
-
 class LangClassifier:
     """
-    Inspired by http://stackoverflow.com/questions/475033/detecting-programming-language-from-a-snippet
+    Inspired by https://github.com/glaslos/langdog
     """
 
     def __init__(self):
         self.data = {}
         self.totals = {}
 
-    def words(self, code):
+    def detect_words(self, code):
         word_list = code.split()
+        tag_list = code.split()
+        for semicolon in code:
+            if semicolon == ";":
+                word_list.append(semicolon)
+        for tag in tag_list:
+            if "</" in tag:
+                word_list.append("</")
+
         return filter(bool, word_list)
 
     def train(self, code, lang):
-        # Trains the classifier
         self.data[lang] = {}
-        for word in self.words(code):
+        for word in self.detect_words(code):
             if word in self.data[lang]:
                 self.data[lang][word] += 1
             else:
@@ -28,20 +32,23 @@ class LangClassifier:
                 self.totals[word] = 1
 
     def prob(self, words, lang):
-        # Calculates the probability
         res = 0.0
         for word in words:
             try:
-                res = res + math.log(self.totals[word] / self.data[lang][word])
-            except(KeyError):
+
+                res = res + self.totals[word] / self.data[lang][word]
+
+            except KeyError:
                 continue
+
         return res
 
     def classify(self, code):
-        # Classifies the input code
         lang_prob = {}
-        words = self.words(code)
-        for lang in self.data.iterkeys():
+        words = self.detect_words(code)
+        for lang in iter(self.data.keys()):
             prob = self.prob(words, lang)
             lang_prob[prob] = lang
-        return "Input file is most likely: " + lang_prob[min(lang_prob.keys())]
+
+        return lang_prob[max(lang_prob.keys())]
+
