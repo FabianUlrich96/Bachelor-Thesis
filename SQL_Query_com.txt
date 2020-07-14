@@ -1,0 +1,25 @@
+select count(id) from questions_nokey where body like '%<code>%'
+977196
+
+select count(id) from questions_nokey 
+1346380
+
+
+Select all questions with code inside:
+select * from questions_nokey where body like '%<code>%'
+
+Create table question_code:
+create table question_code (id int, tags text, code_snippet text, answer_count int, comment_count int, accepted_answer_id int, creation_date date, score int, view_count int, owner_user_id int, favorite_count int, post_type_id int, language text)
+
+
+
+select count(id) from answers where body like '%<code>%'
+1308035
+
+select count(id) from answers 
+1913336
+
+Select all answers with code inside:
+select * from answers where body like '%<code>%'
+
+
