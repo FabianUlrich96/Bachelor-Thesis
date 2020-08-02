@@ -41,7 +41,10 @@ class LangClassifier:
                 res = res + self.totals[word] / self.data[lang][word]
             except KeyError:
                 continue
-        res = res/len_words
+        if len_words > 0:
+            res = res/len_words
+        else:
+            res = 0
         return res
 
     def classify(self, code):
