@@ -1,6 +1,6 @@
 import re
 import pandas as pd
-from SelectCode.DataBaseConnection import DataBaseConnection
+from DataBaseConnection.DataBaseConnection import DataBaseConnection
 
 
 def main():

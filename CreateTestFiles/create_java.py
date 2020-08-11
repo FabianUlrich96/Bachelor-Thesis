@@ -28,7 +28,7 @@ def append_file(file_name, extension, snippet, post_id, file):
     tokens_list = ["import", "package", "class"]
     if size < 95:
         if any(ext in snippet for ext in tokens_list):
-            file.write("\n//ID: " + post_id +"\n" + snippet)
+            file.write("\n//ID: " + post_id + "\n" + snippet)
             file.flush()
         else:
             global j
@@ -47,7 +47,7 @@ def append_file(file_name, extension, snippet, post_id, file):
         str_i = str(i)
         file_name = file_name[:-1]
         FileCreation.create_file(file_name + str_i, extension)
-        append_file(file_name + str_i, extension, snippet, file)
+        append_file(file_name + str_i, extension, snippet, post_id, file)
 
 
 def main():

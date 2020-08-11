@@ -20,17 +20,15 @@ def save_classification(connection, db, answer_df):
 
 def main():
     db, connection = connect_db()
-    question_df = answer_snippet(db, connection)
+    answer_df = answer_snippet(db, connection)
     classifier1 = LangClassifier()
     classifier2 = LangClassifier()
-    classifier3 = LangClassifier()
-    xml_df = bayesian.train_xml(classifier1, question_df)
-    question_df = answer_snippet(db, connection)
-    java_df = bayesian.train_java(classifier2, question_df)
-    question_df = answer_snippet(db, connection)
-    kotlin_df = bayesian.train_kotlin(classifier3, question_df)
+    answer_df = answer_snippet(db, connection)
+    java_df = bayesian.train_java(classifier1, answer_df)
+    answer_df = answer_snippet(db, connection)
+    kotlin_df = bayesian.train_kotlin(classifier2, answer_df)
 
-    language_df = bayesian.create_dataframe(xml_df,java_df,kotlin_df)
+    language_df = bayesian.create_dataframe(java_df, kotlin_df)
 
     save_classification(connection, db, language_df)
 

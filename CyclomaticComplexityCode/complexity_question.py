@@ -1,5 +1,5 @@
 from DataBaseConnection import DataBaseConnection
-from CyclomaticComplexity import CyclomaticComplexity
+from CyclomaticComplexityCode.CyclomaticComplexityClass import Complexity
 
 
 def connect_db():
@@ -22,7 +22,7 @@ def save_complexity(connection, db, kotlin_complexity, java_complexity):
 def main():
     db, database_connection = connect_db()
     kotlin_df, java_df = get_question(database_connection, db)
-    kotlin_complexity, java_complexity = CyclomaticComplexity.CyclomaticComplexity().test_complexity(kotlin_df, java_df)
+    kotlin_complexity, java_complexity = Complexity.test_complexity(kotlin_df, java_df)
     save_complexity(database_connection, db, kotlin_complexity, java_complexity)
 
 

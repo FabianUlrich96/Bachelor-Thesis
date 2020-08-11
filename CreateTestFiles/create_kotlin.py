@@ -38,9 +38,9 @@ def append_file(file_name, extension, snippet, post_id, file):
         file.write("fun main(){}\n")
 
     if size < 95:
-        if "fun main()" in snippet:
+        if "fun main" in snippet:
             function_name = random_char(5)
-            sub_main = re.sub(r'fun main', function_name, snippet)
+            sub_main = re.sub(r'fun main', "fun " + function_name, snippet)
             file.write("\n//ID: " + post_id + "\n" + sub_main)
             file.flush()
         else:
@@ -49,7 +49,7 @@ def append_file(file_name, extension, snippet, post_id, file):
             str_j = str(j)
             f = open(file_name + "_added" + extension, "w", encoding="utf-8")
             f.write(str_j)
-            snippet = "\nfun main(){ \n" + snippet + "\n}"
+            snippet = "\n" + snippet + "\n}"
             file.write("\n//ID: " + post_id + snippet)
             file.flush()
 
@@ -60,7 +60,7 @@ def append_file(file_name, extension, snippet, post_id, file):
         str_i = str(i)
         file_name = file_name[:-1]
         FileCreation.create_file(file_name + str_i, extension)
-        append_file(file_name + str_i, extension, snippet, file)
+        append_file(file_name + str_i, extension, snippet, post_id, file)
 
 
 def main():

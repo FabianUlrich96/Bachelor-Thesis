@@ -1,10 +1,11 @@
 import sqlite3
 import pandas as pd
 
+
 class DataBaseConnection:
 
     def connect_database(self):
-        database_location = r'D:\StackOverflow-Backup\stackoverflow_ru.db'
+        database_location = r'D:\StackOverflow-Backup\stackoverflow_current.db'
 
         db = sqlite3.connect(database_location, timeout=10)
         return db
@@ -105,32 +106,65 @@ class DataBaseConnection:
 
 
     def question_snippet(self, db):
-        df = pd.read_sql_query("select id, code_snippet from question_code_final", db, chunksize=100000)
+        df = pd.read_sql_query("select id, code_snippet from question_code_roughly_filtered", db, chunksize=100000)
         # chunksize=100000
         return df
 
     def answer_snippet(self, db):
-        df = pd.read_sql_query("select id, code_snippet from answer_code_final", db, chunksize=100000)
+        df = pd.read_sql_query("select id, code_snippet from answer_code_roughly_filtered", db, chunksize=100000)
         return df
 
     def save_question_classification(self, db, classification):
-        classification.to_sql('question_code_classification', db, if_exists='append', index=False)
+        classification.to_sql('question_code_classification_new', db, if_exists='append', index=False)
 
     def save_answer_classification(self, db, classification):
-        classification.to_sql('answer_code_classification', db, if_exists='append', index=False)
+        classification.to_sql('answer_code_classification_new', db, if_exists='append', index=False)
 
     def select_question_java(self, db):
-        df = pd.read_sql_query("select id, code_snippet from question_code_classification where propability > 0.75 and language = 'java'", db, chunksize=100000)
+        df = pd.read_sql_query("select id, code_snippet from question_code_classification_new where probability > 0.75 and language = 'java'", db, chunksize=100000)
         return df
 
     def select_answer_java(self, db):
-        df = pd.read_sql_query("select id, code_snippet from answer_code_classification where propability > 0.75 and language = 'java'", db, chunksize=100000)
+        df = pd.read_sql_query("select id, code_snippet from answer_code_classification_new where probability > 0.75 and language = 'java'", db, chunksize=100000)
         return df
 
     def select_question_kotlin(self, db):
-        df = pd.read_sql_query("select id, code_snippet from question_code_classification where propability > 0.75 and language = 'kotlin'", db, chunksize=100000)
+        df = pd.read_sql_query("select id, code_snippet from question_code_classification_new where probability > 0.75 and language = 'kotlin'", db, chunksize=100000)
         return df
 
     def select_answer_kotlin(self, db):
-        df = pd.read_sql_query("select id, code_snippet from answer_code_classification where propability > 0.75 and language = 'kotlin'", db, chunksize=100000)
+        df = pd.read_sql_query("select id, code_snippet from answer_code_classification_new where probability > 0.75 and language = 'kotlin'", db, chunksize=100000)
         return df
+
+    def answer_user_id(self, db):
+        df = pd.read_sql_query(
+            "select distinct owner_user_id from answer_code_roughly_filtered where owner_user_id is not null", db)
+
+        return df
+
+    def question_user_id(self, db):
+        df = pd.read_sql_query(
+            "select distinct owner_user_id from question_code_roughly_filtered where owner_user_id is not null", db)
+
+        return df
+
+    def ru_user_id(self, db):
+        df = pd.read_sql_query(
+            "select com_profile from ru_users where com_profile != ''", db)
+
+        return df
+
+    def save_kotlin_answer_complexity(self, db, classification):
+        classification.to_sql('kotlin_answer_complexity', db, if_exists='append', index=False)
+
+    def save_java_answer_complexity(self, db, classification):
+        classification.to_sql('java_answer_complexity', db, if_exists='append', index=False)
+
+    def save_kotlin_question_complexity(self, db, classification):
+        classification.to_sql('kotlin_question_complexity', db, if_exists='append', index=False)
+
+    def save_java_question_complexity(self, db, classification):
+        classification.to_sql('java_question_complexity', db, if_exists='append', index=False)
+
+
+

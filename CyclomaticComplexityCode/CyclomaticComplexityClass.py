@@ -1,7 +1,7 @@
 import pandas as pd
 
 
-class CyclomaticComplexity:
+class Complexity:
 
     @staticmethod
     def calculate_complexity(snippet):
@@ -27,17 +27,21 @@ class CyclomaticComplexity:
         if elseif_count != 0:
             elseif_count = elseif_count - if_count
 
-        if "switch (" or "switch(" in snippet:
+        matches = ["switch (", "switch("]
+
+        if any(x in snippet for x in matches):
             switch_count = 1 + snippet.count(case_string)
         else:
             switch_count = 0
 
-        if "when (" or "when(" in snippet:
+        matches = ["when (", "when("]
+
+        if any(x in snippet for x in matches):
             when_count = snippet.count(when_string)
         else:
             when_count = 0
 
-        cyclomatic_complexity = if_count + else_count + while_count + for_count + elseif_count + switch_count + when_count
+        cyclomatic_complexity = 1 + if_count + else_count + while_count + for_count + elseif_count + switch_count + when_count
 
         return cyclomatic_complexity
 
@@ -49,7 +53,7 @@ class CyclomaticComplexity:
             for kotlin_row in kotlin_chunk.itertuples():
                 snippet_id = kotlin_row[1]
                 kotlin_snippet = kotlin_row[2]
-                complexity = CyclomaticComplexity.calculate_complexity(kotlin_snippet)
+                complexity = Complexity.calculate_complexity(kotlin_snippet)
                 n_lines = kotlin_snippet.count('\n')
                 line_complexity = complexity/n_lines
                 new_row = {'id': snippet_id, 'code_snippet': kotlin_snippet, 'complexity': complexity, 'n_lines': n_lines, 'line_complexity': line_complexity}
@@ -59,7 +63,7 @@ class CyclomaticComplexity:
             for java_row in java_chunk.itertuples():
                 snippet_id = java_row[1]
                 java_snippet = java_row[2]
-                complexity = CyclomaticComplexity.calculate_complexity(java_snippet)
+                complexity = Complexity.calculate_complexity(java_snippet)
                 n_lines = java_snippet.count('\n')
                 line_complexity = complexity / n_lines
                 new_row = {'id': snippet_id, 'code_snippet': java_snippet, 'complexity': complexity, 'n_lines': n_lines, 'line_complexity': line_complexity}
