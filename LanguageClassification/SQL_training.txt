@@ -1,0 +1,26 @@
+Java code:
+select id, creationdate, body, tags from posts where tags = '<java>'and body like '%<code>%'
+50.000 results
+create table java_posts (id int, creation_date date, body text, tags text)
+
+create table java_code (id int, creation_date date, code_snippet text, tags text)
+
+Kotlin code:
+select id, creationdate, body, tags from posts where tags = '<kotlin>'and body like '%<code>%'
+2.652 results
+create table kotlin_posts (id int, creation_date date, body text, tags text)
+
+create table kotlin_code (id int, creation_date date, code_snippet text, tags text)
+
+
+
+
+XML code:
+select id, creationdate, body, tags from posts where tags = '<xml>'and body like '%<code>%'
+909 results 
+create table xml_posts (id int, creation_date date, body text, tags text)
+
+create table xml_code (id int, creation_date date, code_snippet text, tags text)
+
+
+All from Stackoverflow.com with the max fo 50.000 posts

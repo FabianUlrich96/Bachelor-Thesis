@@ -1,5 +1,4 @@
 from DataBaseConnection.DataBaseConnection import DataBaseConnection
-import pandas as pd
 
 
 def delete_code(df):

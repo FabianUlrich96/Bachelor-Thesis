@@ -166,5 +166,52 @@ class DataBaseConnection:
     def save_java_question_complexity(self, db, classification):
         classification.to_sql('java_question_complexity', db, if_exists='append', index=False)
 
+    def save_java_question_update(self, db, update):
+        update.to_sql('java_question_code_updated', db, if_exists='append', index=False)
+
+    def save_java_answer_update(self, db, update):
+        update.to_sql('java_answer_code_updated', db, if_exists='append', index=False)
+
+    def save_kotlin_question_update(self, db, update):
+        update.to_sql('kotlin_question_code_updated_2', db, if_exists='append', index=False)
+
+    def save_kotlin_answer_update(self, db, update):
+        update.to_sql('kotlin_answer_code_updated_2', db, if_exists='append', index=False)
+
+    def select_kotlin_answer_update(self, db):
+        df = pd.read_sql_query(
+            "select * from 'kotlin_answer_code_updated_2'", db, chunksize=100000)
+        return df
+
+    def select_kotlin_question_update(self, db):
+        df = pd.read_sql_query(
+            "select * from 'kotlin_question_code_updated_2'", db, chunksize=100000)
+        return df
+
+    def select_java_answer_update(self, db):
+        df = pd.read_sql_query(
+            "select * from 'java_answer_code_updated' where ROWID > 155000 order by ROWID limit 45000", db, chunksize=100000)
+        return df
+
+    def select_java_question_update(self, db):
+        df = pd.read_sql_query(
+            "select * from 'java_question_code_updated' where ROWID > 128000 order by ROWID limit 45000", db, chunksize=100000)
+        return df
+
+    def save_ktlint_answers(self, db, update):
+        update.to_sql('ktlint_answers_2', db, if_exists='append', index=False)
+
+    def save_ktlint_questions(self, db, update):
+        update.to_sql('ktlint_questions_2', db, if_exists='append', index=False)
+
+    def save_checkstyle_answers(self, db, update):
+        update.to_sql('checkstyle_answers', db, if_exists='append', index=False)
+
+    def save_checkstyle_questions(self, db, update):
+        update.to_sql('checkstyle_questions', db, if_exists='append', index=False)
+
+
+
+
 
 

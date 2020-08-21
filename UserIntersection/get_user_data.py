@@ -86,7 +86,7 @@ def main():
 
     ru_df, columns = create_df()
     ru_links = get_user_link()
-    ru_df = ru_user_id(ru_links,ru_df, columns)
+    ru_df = ru_user_id(ru_links, ru_df, columns)
     save_db(ru_df, 'ru_users_com')
 
 

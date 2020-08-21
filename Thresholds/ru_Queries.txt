@@ -1,0 +1,46 @@
+SO RU:
+All answers:
+select top 50000 id, tags, body, answercount, commentcount, AcceptedAnswerId,  CreationDate, score, viewcount, owneruserid, favoritecount, PostTypeId, ParentId from posts
+where posttypeid = 2 and Id>1112848
+order by Id asc
+
+Questions:
+select id,tags,body,answercount,commentcount,AcceptedAnswerId,CreationDate,score,viewcount,owneruserid,favoritecount,PostTypeId,ParentId from posts where tags like '%<kotlin%' or Tags like '%kotlin>%' or Tags like '%<kotlin>%' and CreationDate < 31-06-20
+select id,tags,body,answercount,commentcount,AcceptedAnswerId,CreationDate,score,viewcount,owneruserid,favoritecount,PostTypeId,ParentId from posts where tags like '%<android%' or Tags like '%android>%' or Tags like '%<android>%' and CreationDate < 31-06-20
+select id,tags,body,answercount,commentcount,AcceptedAnswerId,CreationDate,score,viewcount,owneruserid,favoritecount,PostTypeId,ParentId from posts where tags like '%<android-studio%' or Tags like '%android-studio>%' or Tags like '%<android-studio>%' and CreationDate < 31-06-20
+
+Remove duplicates: 
+DELETE FROM questions_nokey WHERE rowid NOT IN (SELECT min(rowid) FROM questions_nokey GROUP BY id, tags); 
+
+
+All revisions:
+select top 50000 id, postid, userid, posthistorytypeid from posthistory where userid is not null and Id>0
+order by Id asc
+
+next to execute:
+select top 50000 id, postid, userid, posthistorytypeid from posthistory where userid is not null and Id>6971943
+order by Id asc
+
+
+Add questions from TRT/TST test:
+select id,tags,body,answercount,commentcount,AcceptedAnswerId,CreationDate,score,viewcount,owneruserid,favoritecount,PostTypeId,ParentId from posts where tags like '%<android-fragment%' or Tags like '%android-fragment>%' or Tags like '%<android-fragment>%' and CreationDate < 31-06-20
+select id,tags,body,answercount,commentcount,AcceptedAnswerId,CreationDate,score,viewcount,owneruserid,favoritecount,PostTypeId,ParentId from posts where tags like '%<android-layout%' or Tags like '%android-layout%' or Tags like '%<android-layout%' and CreationDate < 31-06-20
+select id,tags,body,answercount,commentcount,AcceptedAnswerId,CreationDate,score,viewcount,owneruserid,favoritecount,PostTypeId,ParentId from posts where tags like '%<android-sdk%' or Tags like '%android-sdk%' or Tags like '%<android-sdk%' and CreationDate < 31-06-20
+select id,tags,body,answercount,commentcount,AcceptedAnswerId,CreationDate,score,viewcount,owneruserid,favoritecount,PostTypeId,ParentId from posts where tags like '%<listview%' or Tags like '%listview%' or Tags like '%<listview%' and CreationDate < 31-06-20
+select id,tags,body,answercount,commentcount,AcceptedAnswerId,CreationDate,score,viewcount,owneruserid,favoritecount,PostTypeId,ParentId from posts where tags like '%<recyclerview%' or Tags like '%recyclerview%' or Tags like '%<recyclerview%' and CreationDate < 31-06-20
+select id,tags,body,answercount,commentcount,AcceptedAnswerId,CreationDate,score,viewcount,owneruserid,favoritecount,PostTypeId,ParentId from posts where tags like '%<retrofit%' or Tags like '%retrofit%' or Tags like '%<retrofit%' and CreationDate < 31-06-20
+
+Remove duplicates: 
+DELETE FROM questions_nokey WHERE rowid NOT IN (SELECT min(rowid) FROM questions_nokey GROUP BY id, tags); 
+
+TEMP answers table with all answers:
+create table all_answers2 (id int,tags text,body text,answercount int,commentcount int,AcceptedAnswerId int ,CreationDate date,score int,viewcount int,owneruserid int,favoritecount int,PostTypeId int ,ParentId int)
+
+
+
+Create answers table:
+create table answers (id int primary key, body text, creation_date date, owner_user_id int, parent_id int, post_type_id int, score int)
+
+INSERT INTO answers (id, body, creation_date, owner_user_id, parent_id, post_type_id, score)
+SELECT all_answers2.id, all_answers2.body, all_answers2.creationdate, all_answers2.owneruserid, all_answers2.parentid, all_answers2.posttypeid, all_answers2.score
+FROM all_answers2 inner join questions_nokey on all_answers2.parentid = questions_nokey.id

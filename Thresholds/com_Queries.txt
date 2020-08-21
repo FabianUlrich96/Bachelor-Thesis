@@ -1,0 +1,50 @@
+SO COM:
+Get all questions:
+
+select id, tags, body, answer_count, comment_count, Accepted_Answer_Id,  Creation_Date, score, view_count, owner_user_id, favorite_count, Post_Type_Id, Parent_Id  from bigquery-public-data.stackoverflow.posts_questions where tags is not null and tags LIKE '%kotlin%'
+select id, tags, body, answer_count, comment_count, Accepted_Answer_Id,  Creation_Date, score, view_count, owner_user_id, favorite_count, Post_Type_Id, Parent_Id  from bigquery-public-data.stackoverflow.posts_questions where tags is not null and tags LIKE '%android%'
+select id, tags, body, answer_count, comment_count, Accepted_Answer_Id,  Creation_Date, score, view_count, owner_user_id, favorite_count, Post_Type_Id, Parent_Id  from bigquery-public-data.stackoverflow.posts_questions where tags is not null and tags LIKE '%android-studio%'
+
+
+Remove duplicates: 
+DELETE FROM questions_nokey WHERE rowid NOT IN (SELECT min(rowid) FROM questions_nokey GROUP BY id, tags); 
+[2020-06-30 17:12:52] 94611 rows affected in 43 s 49 ms
+
+Count: 1346380 
+
+
+
+Get all answers:
+select id,body,creation_date,owner_user_id,parent_id,post_type_id,score from bigquery-public-data.stackoverflow.posts_answers where parent_id is not null
+
+
+Get all post history:
+select post_id, user_id, post_history_type_id from bigquery-public-data.stackoverflow.post_history where user_id is not null
+
+
+Add tags from TRT and TST test:
+select id, tags, body, answer_count, comment_count, Accepted_Answer_Id,  Creation_Date, score, view_count, owner_user_id, favorite_count, Post_Type_Id, Parent_Id  from bigquery-public-data.stackoverflow.posts_questions where tags is not null and tags like '%|android-activity%' or Tags like '|android-activity|%' or Tags like '%|android-activity|%'
+select id, tags, body, answer_count, comment_count, Accepted_Answer_Id,  Creation_Date, score, view_count, owner_user_id, favorite_count, Post_Type_Id, Parent_Id  from bigquery-public-data.stackoverflow.posts_questions where tags is not null and tags like '%|android-asynctask%' or Tags like '|android-asynctask|%' or Tags like '%|android-asynctask|%'
+select id, tags, body, answer_count, comment_count, Accepted_Answer_Id,  Creation_Date, score, view_count, owner_user_id, favorite_count, Post_Type_Id, Parent_Id  from bigquery-public-data.stackoverflow.posts_questions where tags is not null and tags like '%|android-fragments%' or Tags like '|android-fragments|%' or Tags like '%|android-fragments|%'
+select id, tags, body, answer_count, comment_count, Accepted_Answer_Id,  Creation_Date, score, view_count, owner_user_id, favorite_count, Post_Type_Id, Parent_Id  from bigquery-public-data.stackoverflow.posts_questions where tags is not null and tags like '%|android-intent%' or Tags like '|android-intent|%' or Tags like '%|android-intent|%'
+select id, tags, body, answer_count, comment_count, Accepted_Answer_Id,  Creation_Date, score, view_count, owner_user_id, favorite_count, Post_Type_Id, Parent_Id  from bigquery-public-data.stackoverflow.posts_questions where tags is not null and tags like '%|android-layout%' or Tags like '|android-layout|%' or Tags like '%|android-layout|%'
+select id, tags, body, answer_count, comment_count, Accepted_Answer_Id,  Creation_Date, score, view_count, owner_user_id, favorite_count, Post_Type_Id, Parent_Id  from bigquery-public-data.stackoverflow.posts_questions where tags is not null and tags like '%|android-listview%' or Tags like '|android-listview|%' or Tags like '%|android-listview|%'
+select id, tags, body, answer_count, comment_count, Accepted_Answer_Id,  Creation_Date, score, view_count, owner_user_id, favorite_count, Post_Type_Id, Parent_Id  from bigquery-public-data.stackoverflow.posts_questions where tags is not null and tags like '%|android-recyclerview%' or Tags like '|android-recyclerview|%' or Tags like '%|android-recyclerview|%'
+select id, tags, body, answer_count, comment_count, Accepted_Answer_Id,  Creation_Date, score, view_count, owner_user_id, favorite_count, Post_Type_Id, Parent_Id  from bigquery-public-data.stackoverflow.posts_questions where tags is not null and tags like '%|xamarin.android%' or Tags like '|xamarin.android|%' or Tags like '%|xamarin.android|%'
+
+DELETE FROM questions_nokey WHERE rowid NOT IN (SELECT min(rowid) FROM questions_nokey GROUP BY id, tags); 
+[2020-07-05 11:35:52] 218332 rows affected in 38 s 996 ms
+
+
+Count in all_answers:
+29468374
+
+
+Create answers table:
+create table answers (id int primary key, body text, creation_date date, owner_user_id int, parent_id int, post_type_id int, score int)
+
+
+INSERT INTO answers (id, body, creation_date, owner_user_id, parent_id, post_type_id, score)
+SELECT all_answers.id, all_answers.body, all_answers.creation_date, all_answers.owner_user_id, all_answers.parent_id, all_answers.post_type_id, all_answers.score
+FROM all_answers inner join questions_nokey on all_answers.parent_id = questions_nokey.id
+

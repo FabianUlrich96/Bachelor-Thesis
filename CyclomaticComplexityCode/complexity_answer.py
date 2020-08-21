@@ -2,6 +2,7 @@ from DataBaseConnection import DataBaseConnection
 
 from CyclomaticComplexityCode.CyclomaticComplexityClass import Complexity
 
+
 def connect_db():
     database_connection = DataBaseConnection.DataBaseConnection()
     db = DataBaseConnection.DataBaseConnection.connect_database(database_connection)

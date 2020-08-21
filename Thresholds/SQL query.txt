@@ -1,0 +1,7 @@
+select count(tags) from posts where Tags like '%<java%' or Tags like '%java>%' or Tags like '%<java>%' and CreationDate < 31-06-20
+
+
+First threshold of a minimum of 10k posts in the mobile count!
+
+
+First threshold SO.ru minimum of 300 posts in the mobile count!
