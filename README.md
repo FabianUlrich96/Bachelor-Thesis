@@ -148,6 +148,6 @@ Request user id's from the stackoverflow.ru database, request the user profiles 
 Requirements:
 - package BeautifulSoup
 - package get
+- package time
 
 Webscrape the user profiles from the ru.stackoverflow page and search if the user has a stackoverflow.com profile as well.
-- package time
