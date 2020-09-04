@@ -157,14 +157,34 @@ class DataBaseConnection:
     def save_kotlin_answer_complexity(self, db, classification):
         classification.to_sql('kotlin_answer_complexity', db, if_exists='append', index=False)
 
+    def select_kotlin_answer_complexity(self,db):
+        df = pd.read_sql_query(
+            "select complexity, line_complexity from 'kotlin_answer_complexity'", db)
+        return df
+
     def save_java_answer_complexity(self, db, classification):
         classification.to_sql('java_answer_complexity', db, if_exists='append', index=False)
+
+    def select_java_answer_complexity(self,db):
+        df = pd.read_sql_query(
+            "select complexity, line_complexity from 'java_answer_complexity'", db)
+        return df
 
     def save_kotlin_question_complexity(self, db, classification):
         classification.to_sql('kotlin_question_complexity', db, if_exists='append', index=False)
 
+    def select_kotlin_question_complexity(self,db):
+        df = pd.read_sql_query(
+            "select complexity, line_complexity from 'kotlin_question_complexity'", db)
+        return df
+
     def save_java_question_complexity(self, db, classification):
         classification.to_sql('java_question_complexity', db, if_exists='append', index=False)
+
+    def select_java_question_complexity(self, db):
+        df = pd.read_sql_query(
+            "select complexity, line_complexity from 'java_question_complexity'", db)
+        return df
 
     def save_java_question_update(self, db, update):
         update.to_sql('java_question_code_updated', db, if_exists='append', index=False)

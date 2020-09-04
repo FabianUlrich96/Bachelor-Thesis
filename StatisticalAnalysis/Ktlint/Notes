@@ -1,0 +1,48 @@
+SO.ru:
+Answers: Only 2 valid files out of 172 (~1,16%)
+Questions: Only 10 valid files out of 488 (~2,05%)
+
+
+SO.com:
+Answers:
+513 valid files out of 14.557 (~3,52%)
+329 without any errors
+
+561 indention errors (110 snippets)
+31 semicolon errors (16 snippets)
+34 wildcard error (28 snippets)
+22 blank line errors (12 errors)
+58 whitespace errors (35 errors)
+5 return errors (5 snippets)
+7 redundant error (5 snippets)
+1 break error (1 snippet)
+
+
+Questions: 786 valid files out of 23.773  (~3,31%)
+432 without any errors
+
+1196 indention errors (223 snippets)
+109 semicolon errors (46 snippets)
+71 wildcard errors (60 snippets)
+26 blank line errors (20 snippets)
+97 whitespace errors (71 snippets)
+6 return errors (6 snippets)
+22 redundant errors (13 snippets)
+0 break errors
+
+
+SQL Query:
+select DISTINCT a.id, a.score, s.total_errors FROM(
+select id, sum(indention_error + semicolon_error + wildcard_error + blank_line_error + whitespace_error + return_error + redundant_error +break_error) AS "total_errors" From ktlint_questions_2 where valid_file = 1 group by id HAVING SUM(indention_error + semicolon_error + wildcard_error + blank_line_error + whitespace_error + return_error + redundant_error +break_error) > 0) s INNER JOIN question_code_final a on s.id = a.id
+
+Results for three groups:
+Popular 5 or more upvotes:
+Answers: count 22, error_sum 100, average ~4,55, median 2,5
+Questions: count 35, error_sum 720, average ~20,57, median 2
+Neither very popular not unpopular (between 1 and 4 upvotes):
+Answers: count 102, error_sum 383, average ~3,76, median 2
+Questions: count 157, error_sum 824, average ~5,25, median 2
+
+Unpopular 0 or less upvotes:
+Answers: count 45, error_sum 236, average ~5,27, median 3
+Questions: count 129, error_sum 596, average ~4,62, median 2

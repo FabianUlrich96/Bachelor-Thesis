@@ -1,0 +1,138 @@
+All files are valid and a check got performed!
+
+SO.com:
+Answers:
+Total count answers: 561625
+Count answers with any error: 130932
+Percentage: 0,2331306476741598
+
+Questions:
+Total count questions: 598304
+Count questions with any error: 221211
+Percentage: 0,3753767155831286
+
+
+SO.ru:
+Answers:
+Total count answers: 6420
+Count answers with any error: 1201
+Percentage: 0,1870716510903427
+
+Questions:
+Total count questions: 12273
+Count questions with any error: 4016
+Percentage: 0,3272223580216736
+
+
+form_answers_ru
+Median: 	1.0
+Mode:  		1
+Mean		1.658596
+Std:		1.41838
+
+
+form_questions_ru
+Median:		1.0
+Mode:		1
+Mean		2.274203
+Std:		2.387528
+
+form_answers_com
+Median:		1.0
+Mode:   	1
+Mean		1.97324
+Std:		2.122301
+
+form_questions_com
+Median:		2.0
+Mode:  		1
+Mean		2.534358
+Std:		2.797145
+
+placement_answers_ru
+Median:		2.0
+
+Mode:  		1
+Mean		2.519435
+Std:		2.505769
+
+placement_questions_ru
+Median:		2.0
+Mode:  		1
+Mean		3.006129
+Std:		3.904269
+
+placement_answers_com
+Median:		2.0
+
+Mode:   	1
+Mean		2.953689
+Std:		3.937016
+
+placement_questions_com
+Median:		2.0
+Mode:   	1
+Mean		3.914942
+Std:		5.502163
+
+whitespace_answers_ru
+Median:		2.0
+Mode:   	1
+Mean		3.584225
+Std:		5.261781
+
+whitespace_questions_ru
+Median:		3.0
+Mode:  		1
+Mean		6.301392
+Std:		10.768327
+
+whitespace_answers_com
+Median:		3.0
+Mode:   	1
+Mean		5.154261
+Std:		8.205663
+
+whitespace_questions_com
+Median:		4.0
+Mode:  		1
+Mean		9.121478
+Std:		14.835536
+
+use_answers_ru
+Median:		2.0
+Mode: 		1
+Mean		2.575
+Std:		2.600666
+
+use_questions_ru
+Median:		2.0
+Mode:  		1
+Mean		4.09507
+Std:		4.664562
+
+use_answers_com
+Median:     4.0
+Mode:       1
+Mean        6.350928
+Std:        6.915778
+
+use_questions_com
+Median:		4.0
+Mode:   	1  incorrect_use
+Mean		6.350928
+Std:		6.915778
+
+
+
+Results for three groups:
+Popular 5 or more upvotes:
+Answers: count 12149, error_sum 7265, average ~5,97, median 3
+Questions: count 8853, error_sum 72663, average ~8,21, median 4
+Neither very popular not unpopular (between 1 and 4 upvotes):
+Answers: count 45758, error_sum 265878, average ~5,81, median 3
+Questions: count 61385, error_sum 656173, average ~10,69, median 5
+
+Unpopular 0 or less upvotes:
+Answers: count 50369, error_sum 300860, average ~5,97, median 3
+Questions: count 106829, error_sum 1304692, average ~12,21, median 6
