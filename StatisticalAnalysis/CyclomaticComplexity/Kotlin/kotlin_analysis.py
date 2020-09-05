@@ -15,6 +15,15 @@ def select_questions():
 
     return question_df, question_df_ru
 
+def plot_countplot(data, file_name, width, height, x_label):
+    plt.figure(figsize=(width, height))
+    ax = sns.countplot(data)
+    ax.set_xbound(0, 9)
+    plt.xlabel(x_label, fontsize=15)
+    plt.ylabel("Frequency", fontsize=15)
+    plt.savefig(file_name, bbox_inches="tight")
+    plt.show()
+
 
 def plot_histogram(data, file_name, bins, x_label):
     sns.distplot(data, bins=bins)
@@ -58,10 +67,10 @@ def main():
     print(df_com_ru)
     plot_boxplot(df_com_ru, "kotlin_com_ru_cc_boxplot.png")
 
-    plot_histogram(answer_df['complexity'], "kotlin_SO.com_answers_cc_histogram.png", 100, "Cyclomatic Complexity")
-    plot_histogram(question_df['complexity'], "kotlin_SO.com_questions_cc_histogram.png", 100, "Cyclomatic Complexity")
-    plot_histogram(answer_df_ru['complexity'], "kotlin_SO.ru_answers_cc_histogram.png", 100, "Cyclomatic Complexity")
-    plot_histogram(question_df_ru['complexity'], "kotlin_SO.ru_questions_cc_histogram.png", 100, "Cyclomatic Complexity")
+    plot_countplot(answer_df['complexity'], "kotlin_SO.com_answers_cc_countplot.png", 8, 4, "Cyclomatic Complexity")
+    plot_countplot(question_df['complexity'], "kotlin_SO.com_questions_cc_countplot.png", 8, 4, "Cyclomatic Complexity")
+    plot_countplot(answer_df_ru['complexity'], "kotlin_SO.ru_answers_cc_countplot.png", 8, 4, "Cyclomatic Complexity")
+    plot_countplot(question_df_ru['complexity'], "kotlin_SO.ru_questions_cc_countplot.png", 8, 4, "Cyclomatic Complexity")
 
     plot_histogram(answer_df['line_complexity'], "kotlin_SO.com_answer_cc_line_histogram.png", 100,
                    "Cyclomatic Complexity Density")
