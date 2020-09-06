@@ -4,13 +4,13 @@ from matplotlib import pyplot as plt
 
 
 def select_answers():
-    answer_df = pd.read_csv("checkstyle_answers_total_errors.csv", encoding='utf8')
+    answer_df = pd.read_csv("ru_checkstyle_answer_total_errors.csv", encoding='utf8')
 
     return answer_df
 
 
 def select_questions():
-    question_df = pd.read_csv("checkstyle_questions_total_errors.csv", encoding='utf8')
+    question_df = pd.read_csv("ru_checkstyle_question_total_errors.csv", encoding='utf8')
 
     return question_df
 
@@ -27,8 +27,8 @@ def plot_boxplot(data, file_name):
 def main():
     answer_df = select_answers()
     question_df = select_questions()
-    plot_boxplot(answer_df, "checkstyle_answers_popularity.png")
-    plot_boxplot(question_df, 'checkstyle_questions_popularity.png')
+    plot_boxplot(answer_df, "ru_checkstyle_answers_popularity.png")
+    plot_boxplot(question_df, 'ru_checkstyle_questions_popularity.png')
 
 
 if __name__ == "__main__":

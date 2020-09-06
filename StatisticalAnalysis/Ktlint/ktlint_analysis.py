@@ -17,6 +17,7 @@ def select_questions():
 
 def plot_boxplot(data, file_name):
     ax = sns.boxplot(x="popularity", y="total_errors", hue="popularity", data=data, showfliers=False)
+    plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., prop={'size': 15})
     plt.xlabel("Popularity", fontsize=15)
     plt.ylabel("Errors", fontsize=15)
     plt.savefig(file_name)

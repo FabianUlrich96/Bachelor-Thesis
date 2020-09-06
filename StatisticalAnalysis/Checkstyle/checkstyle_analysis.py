@@ -24,12 +24,6 @@ def plot_boxplot(data, file_name):
     plt.show()
 
 
-def write_file(name, value):
-    f = open(name, "a")
-    f.write(value + "\n")
-    f.close()
-
-
 def get_statistics(data, name):
     median = data.median(axis=0)
     mode = data.mode(axis=0)
@@ -151,7 +145,7 @@ def main():
     use_question_df_ru = use_question_df_ru[use_question_df_ru.error_count != 0]
     use_question_df_com = use_question_df_com[use_question_df_com.error_count != 0]
     use_answer_df_ru = use_answer_df_ru[use_answer_df_ru.error_count != 0]
-    use_answer_df_com = use_question_df_com[use_question_df_com.error_count != 0]
+    use_answer_df_com = use_answer_df_com[use_answer_df_com.error_count != 0]
 
     get_statistics(form_answer_df_ru, "form_answers_ru")
     get_statistics(form_question_df_ru, "form_questions_ru")

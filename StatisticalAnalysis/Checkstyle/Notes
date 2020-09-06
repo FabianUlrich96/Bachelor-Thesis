@@ -125,7 +125,7 @@ Std:		6.915778
 
 
 
-Results for three groups:
+Results for three groups (SO.com):
 Popular 5 or more upvotes:
 Answers: count 12149, error_sum 7265, average ~5,97, median 3
 Questions: count 8853, error_sum 72663, average ~8,21, median 4
@@ -136,3 +136,16 @@ Questions: count 61385, error_sum 656173, average ~10,69, median 5
 Unpopular 0 or less upvotes:
 Answers: count 50369, error_sum 300860, average ~5,97, median 3
 Questions: count 106829, error_sum 1304692, average ~12,21, median 6
+
+Results for three groups (SO.ru):
+Popular 5 or more upvotes:
+Answers: count 83, error sum 314, average ~3,78, median 2
+Questions: count 48, error sum 284, average ~5,92, median 3
+
+Neither very popular not unpopular (between 1 and 4 upvotes):
+Answers: count 723, error sum 2886, average ~4, median 2
+Questions: count 1288, error sum 10000, average 7,76, median 4
+
+Unpopular 0 or less upvotes:
+Answers: count 248, error sum 982, average ~3,96, median 2
+Questions: count 1908, error sum 14756, average ~ 7,73, median 4
