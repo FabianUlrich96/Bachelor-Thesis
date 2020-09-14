@@ -151,3 +151,70 @@ Requirements:
 - package time
 
 Webscrape the user profiles from the ru.stackoverflow page and search if the user has a stackoverflow.com profile as well.
+
+## StatisticalAnalysis
+### Checkstyle
+#### checkstyle_analysis.py: 
+Requirements: 
+- package pandas
+- package seaborn
+- matplotlib 
+Main file for the statistical analysis of the Checkstyle results
+
+#### checkstyle_analysis_popularity.py 
+Requirements:
+- package pandas
+- package seaborn
+- matplotlib 
+
+File for the statistical analysis of the results by popularity on the platform by assigning unpopular, neutral and popular to each post using the score of each post.
+Popular = Score of 5 and greater
+Neutral = Score between 0 and 4
+Unpopular = Score less than 0
+
+The rest of the files are the resulting graphs and the .csv files that have been taken from the database for analysis.
+
+### ktlint
+#### ktlint_analysis.py
+Requirements:
+- package pandas
+- package seaborn
+- matplotlib 
+
+Main file for the statistical analysis of the ktlint results.
+The rest of the files are the resulting graphs and the .csv files that have been taken from the database for analysis.
+
+### Cyclomatic Complexity
+#### Java
+##### java_analysis.py
+Requirements:
+- package pandas
+- package seaborn
+- matplotlib 
+- numpy
+
+Main file for analysing the Java Cyclomatic Complexity
+
+##### java_lines_analysis.py
+Requirements:
+- package pandas
+
+File to analyse the Java Cyclomatic Complexity Density
+
+#### Kotlin
+##### kotlin_analysis.py
+Requirements:
+- package pandas
+- package seaborn
+- matplotlib 
+
+Main file for analysing the Kotlin Cyclomatic Complexity
+
+##### kotlin_lines_analysis.py
+Requirements:
+- package pandas
+
+File to analyse the Kotlin Cyclomatic Complexity Density
+
+
+
